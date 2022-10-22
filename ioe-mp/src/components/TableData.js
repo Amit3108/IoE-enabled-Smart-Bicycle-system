@@ -36,10 +36,10 @@ function TableData() {
         {data.map((item,index) => {
             return(
             <tr key={item.key}>
-                <td>{index+1}</td>
+                <td style={{textAlign:"center"}}>{index+1}</td>
                 <td>{item.location}</td>
-                <td>{item.date}</td>
-                <td>{item.time}</td>
+                <td style={{textAlign:"center"}}>{item.date}</td>
+                <td style={{textAlign:"center"}}>{item.time}</td>
             </tr>
             )
         })}
