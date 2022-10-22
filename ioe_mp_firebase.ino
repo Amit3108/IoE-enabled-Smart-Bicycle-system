@@ -27,9 +27,11 @@ char auth[] = "JuUcP6YwnEd3vIvbGwWscWitGNZWcNOg";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "jeetesh";//your wifi name
-char pass[] = "jmn12345"; //your wifi password
-String acc_location = "Nerul";
+char ssid[] = "Redmi Note 7S";//your wifi name
+char pass[] = "paru2001"; //your wifi password
+
+//Declaring location
+String acc_location = "Panvel";
 
 WidgetLCD lcd(V1);
 BlynkTimer timer;
