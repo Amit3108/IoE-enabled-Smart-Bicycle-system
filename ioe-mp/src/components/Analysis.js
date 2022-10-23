@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 
 function Analysis() {
   const [data, setData] = useState([]);
-  useEffect(() => {
+  const [cOccurence, setCOccurence] = useState([]);
+  const [dOccurence, setDOccurence] = useState([]);
+  useEffect( async() => {
     const fetchdata = async () => {
       const response = await fetch(
         "https://smart-bicycle-ioe-default-rtdb.firebaseio.com/acc_data.json"
@@ -20,34 +22,61 @@ function Analysis() {
       }
       setData(d);
     };
-    fetchdata();
+    //
+    const findOcc = (data, key) => {
+      let arr2 = [];
+      data.forEach((x)=>{
+         if(arr2.some((val)=>{ return val[key] === x[key] })){
+           arr2.forEach((k)=>{
+             if(k[key] === x[key]){ 
+               k["occurrence"]++
+             }
+          })
+             
+         }else{
+           let a = {}
+           a[key] = x[key]
+           a["occurrence"] = 1
+           arr2.push(a);
+         }
+      })
+      // setCOccurence(arr2)
+      return arr2
+    }
+    //
+    const dateOcc = (data, key) => {
+      let dateArr2 = [];
+      data.forEach((x)=>{
+         if(dateArr2.some((val)=>{ return val[key] === x[key] })){
+          dateArr2.forEach((k)=>{
+             if(k[key] === x[key]){ 
+               k["occurrence"]++
+             }
+          })    
+         }else{
+           let a = {}
+           a[key] = x[key]
+           a["occurrence"] = 1
+           dateArr2.push(a);
+         }
+      })  
+      return dateArr2
+    }
+    // await fetchdata();
+    // setCOccurence(findOcc(data,"location"))
+    // setDOccurence(dateOcc(data,"date"))
+    const getdata=async()=>{
+      await fetchdata();
+      setCOccurence(findOcc(data,"location"))
+      setDOccurence(dateOcc(data,"date"))
+    };
+    getdata()
   }, []);
   console.log(data);
-  //
-  const findOcc = (data, key) => {
-    let arr2 = [];
-      
-    data.forEach((x)=>{
-       if(arr2.some((val)=>{ return val[key] === x[key] })){
-         arr2.forEach((k)=>{
-           if(k[key] === x[key]){ 
-             k["occurrence"]++
-           }
-        })
-           
-       }else{
-         let a = {}
-         a[key] = x[key]
-         a["occurrence"] = 1
-         arr2.push(a);
-       }
-    })
-      
-    return arr2
-  }
-  let key = "location"
-  console.log(findOcc(data,key))
-  //
+  console.log(cOccurence);
+  console.log(dOccurence);
+
+   
   return (
     <div>
       <h2 style={{ textAlign: "center", margin: "10px", marginTop:"20px" }}>Analysis</h2>
