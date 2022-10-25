@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Chart } from "react-google-charts";
+
 
 function Analysis() {
   const [data, setData] = useState([]);
@@ -23,7 +25,7 @@ function Analysis() {
   };
   //
   const findOcc = (data, key) => {
-    let arr2 = [];
+    let arr2 = [['Cities','Count']];
     data.forEach((x) => {
       if (arr2.some((val) => { return val[0] === x[key] })) {
         arr2.forEach((k) => {
@@ -44,7 +46,7 @@ function Analysis() {
   }
   //
   const dateOcc = (data, key) => {
-    let dateArr2 = [];
+    let dateArr2 = [['Date','Count']];
     data.forEach((x) => {
       if (dateArr2.some((val) => { return val[0] === x[key] })) {
         dateArr2.forEach((k) => {
@@ -79,11 +81,39 @@ function Analysis() {
   console.log(data);
   console.log(cOccurence);
   console.log(dOccurence);
+  const topCities = cOccurence.sort((a, b) => b[1] - a[1]).slice(0,5)
+  console.log(topCities) 
 
 
+  const options = {
+    chart: {
+      title: "Daily Accident count",
+    },
+  };
+  const options2 = {
+    chart: {
+      title: "Top 4 cities",
+    },
+  };
   return (
     <div>
       <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>Analysis</h2>
+      <Chart
+      chartType="Line"
+      width="70%"
+      height="300px"
+      data={dOccurence}
+      options={options}
+      style= {{marginLeft:"15%"}}
+    />
+    <Chart
+      chartType="Bar"
+      width="70%"
+      height="300px"
+      data={topCities}
+      options={options2}
+      style= {{marginTop: "30px",marginLeft:"15%"}}
+    />
     </div>
   );
 }
