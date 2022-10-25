@@ -25,17 +25,17 @@ function Analysis() {
   const findOcc = (data, key) => {
     let arr2 = [];
     data.forEach((x) => {
-      if (arr2.some((val) => { return val[key] === x[key] })) {
+      if (arr2.some((val) => { return val[0] === x[key] })) {
         arr2.forEach((k) => {
-          if (k[key] === x[key]) {
-            k["occurrence"]++
+          if (k[0] === x[key]) {
+            k[1] = k[1] + 1
           }
         })
 
       } else {
-        let a = {}
-        a[key] = x[key]
-        a["occurrence"] = 1
+        let a = []
+        a[0] = x[key]
+        a[1] = 1
         arr2.push(a);
       }
     })
@@ -46,16 +46,16 @@ function Analysis() {
   const dateOcc = (data, key) => {
     let dateArr2 = [];
     data.forEach((x) => {
-      if (dateArr2.some((val) => { return val[key] === x[key] })) {
+      if (dateArr2.some((val) => { return val[0] === x[key] })) {
         dateArr2.forEach((k) => {
-          if (k[key] === x[key]) {
-            k["occurrence"]++
+          if (k[0] === x[key]) {
+            k[1] = k[1] + 1
           }
         })
       } else {
-        let a = {}
-        a[key] = x[key]
-        a["occurrence"] = 1
+        let a = []
+        a[0] = x[key]
+        a[1] = 1
         dateArr2.push(a);
       }
     })
