@@ -1,7 +1,6 @@
 .main-content{
     display: flex;
     width: 100%;
-    height:92vh;
 }
 .tabledata,.analysis{
     width: 50%;
@@ -9,4 +8,10 @@
 }
 .tabledata{
     border-right: 1px solid black;
+    height: auto;
+    margin-bottom: 10px;
+}
+.analysis{
+    position: fixed;
+    margin-left: 50%;
 }

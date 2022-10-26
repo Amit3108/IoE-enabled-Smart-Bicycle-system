@@ -9,8 +9,10 @@
     justify-content: space-around;
     align-items: center;
     height: 8vh;
+    width: 100%;
     background-color: #008080;
     color: white;
+    position: fixed;
 }
 
 .logo{
