@@ -6,6 +6,18 @@ function Analysis() {
   const [data, setData] = useState([]);
   const [cOccurence, setCOccurence] = useState([]);
   const [dOccurence, setDOccurence] = useState([]);
+  const [doccur, setDoccur] = useState([])
+  function getAllDaysInMonth(year, month) {
+    const date = new Date(year, month, 1);
+    const dates = [];
+    while (date.getMonth() === month) {
+      dates.push(new Date(date).toLocaleDateString());
+      date.setDate(date.getDate() + 1);
+    }
+    return dates;
+  }
+  const now = new Date();
+  const d = getAllDaysInMonth(now.getFullYear(), now.getMonth());
   const fetchdata = async () => {
     const response = await fetch(
       "https://smart-bicycle-ioe-default-rtdb.firebaseio.com/acc_data.json"
@@ -25,7 +37,7 @@ function Analysis() {
   };
   //
   const findOcc = (data, key) => {
-    let arr2 = [['Cities','Count']];
+    let arr2 = [['Cities', 'Count']];
     data.forEach((x) => {
       if (arr2.some((val) => { return val[0] === x[key] })) {
         arr2.forEach((k) => {
@@ -46,7 +58,7 @@ function Analysis() {
   }
   //
   const dateOcc = (data, key) => {
-    let dateArr2 = [['Date','Count']];
+    let dateArr2 = [['Date', 'Count']];
     data.forEach((x) => {
       if (dateArr2.some((val) => { return val[0] === x[key] })) {
         dateArr2.forEach((k) => {
@@ -71,18 +83,39 @@ function Analysis() {
   }, []);
   useEffect(() => {
 
-    const getdata2 = () => {
+    const getdata2 = async () => {
       setCOccurence(findOcc(data, "location"))
       setDOccurence(dateOcc(data, "date"))
+
     }
     getdata2()
 
   }, [data])
+  useEffect(() => {
+    const docc = [['Date', 'Count']]
+    console.log(dOccurence)
+    for (const i in d) {
+      var t = false
+      for (const j in dOccurence) {
+        var d1 = new Date(d[i])
+        var d2 = new Date(dOccurence[j][0])
+        if (d1.toLocaleDateString() === d2.toLocaleDateString()) {
+          t = true
+          docc.push([d[i], dOccurence[j][1]])
+        }
+      }
+      if (!t) {
+        docc.push([d[i], 0])
+      }
+    }
+    setDoccur(docc)
+  }, [dOccurence])
   console.log(data);
   console.log(cOccurence);
   console.log(dOccurence);
-  const topCities = cOccurence.sort((a, b) => b[1] - a[1]).slice(0,5)
-  console.log(topCities) 
+  const topCities = cOccurence.sort((a, b) => b[1] - a[1]).slice(0, 5)
+  console.log(topCities)
+  console.log(doccur)
 
 
   const options = {
@@ -99,21 +132,21 @@ function Analysis() {
     <div>
       <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>Analysis</h2>
       <Chart
-      chartType="Line"
-      width="70%"
-      height="300px"
-      data={dOccurence}
-      options={options}
-      style= {{marginLeft:"15%"}}
-    />
-    <Chart
-      chartType="Bar"
-      width="70%"
-      height="300px"
-      data={topCities}
-      options={options2}
-      style= {{marginTop: "30px",marginLeft:"15%"}}
-    />
+        chartType="Line"
+        width="70%"
+        height="300px"
+        data={doccur}
+        options={options}
+        style={{ marginLeft: "15%" }}
+      />
+      <Chart
+        chartType="Bar"
+        width="70%"
+        height="300px"
+        data={topCities}
+        options={options2}
+        style={{ marginTop: "30px", marginLeft: "15%" }}
+      />
     </div>
   );
 }
