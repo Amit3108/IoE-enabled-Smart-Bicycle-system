@@ -117,35 +117,24 @@ function Analysis() {
   console.log(topCities)
   console.log(doccur)
 
-
-  const options = {
-    chart: {
-      title: "Daily Accident count",
-    },
-  };
-  const options2 = {
-    chart: {
-      title: "Top 4 cities",
-    },
-  };
   return (
     <div>
       <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>Analysis</h2>
+      <h4 style={{marginBottom:"8px", textAlign:"center"}}>Daily Accident Count</h4>
       <Chart
         chartType="Line"
         width="70%"
         height="300px"
         data={doccur}
-        options={options}
         style={{ marginLeft: "15%" }}
       />
+      <h4 style={{marginTop: "30px",marginBottom:"8px", textAlign:"center"}}>Top 4 cities</h4>
       <Chart
         chartType="Bar"
         width="70%"
         height="300px"
         data={topCities}
-        options={options2}
-        style={{ marginTop: "30px", marginLeft: "15%" }}
+        style={{ marginLeft: "15%" }}
       />
     </div>
   );

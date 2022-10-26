@@ -8,9 +8,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="main-content">
-        <div className="tabledata"><TableData /></div>
-        <div className="analysis"><Analysis /></div>
+      <div className="main-content" >
+        <div className="tabledata" style={{marginTop: "8vh"}}><TableData /></div>
+        <div className="analysis" style={{marginTop: "8vh"}}><Analysis /></div>
       </div>
     </>
   );
