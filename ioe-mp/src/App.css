@@ -1,3 +1,5 @@
+
+@import '~antd/dist/antd.css';
 .main-content{
     display: flex;
     width: 100%;
@@ -9,9 +11,13 @@
 .tabledata{
     border-right: 1px solid black;
     height: auto;
-    margin-bottom: 10px;
+    min-height: 91vh;
+    margin-bottom: 1vh;
 }
 .analysis{
     position: fixed;
     margin-left: 50%;
+}
+.body{
+    background-color: #e7f8f8;
 }

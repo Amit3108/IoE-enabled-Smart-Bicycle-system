@@ -1,3 +1,5 @@
+
+@import '~antd/dist/antd.css';
 table {
     margin: 5px auto;
     border-collapse: collapse;
