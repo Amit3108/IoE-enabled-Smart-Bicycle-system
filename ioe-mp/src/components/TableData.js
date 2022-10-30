@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./table-style.css";
+import {Table} from 'antd';
 
 function TableData() {
   const [data, setData] = useState([]);
@@ -23,17 +24,43 @@ function TableData() {
     };
     fetchdata();
   }, []);
+  //
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
+
+  const columns = [
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      width: '25%',
+      filterMode: 'tree',
+      filterSearch: true,
+      onFilter: (value, record) => record.location.startsWith(value),
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      width: "20%"
+    },
+    {
+      title: 'Time',
+      dataIndex: 'time',
+      width: "20%"
+    },
+  ];
+  //
   return (
     <>
     <h2 style={{ textAlign: "center", margin: "10px", marginTop:"20px"}}>Accident details</h2>
-    <table>
+    {/* <table>
         <tr>
             <th>Sr No.</th>
             <th>Location</th>
             <th>Date</th>
             <th>Time</th>
         </tr>
-        {data.map((item,index) => {
+        {data.slice(0).reverse().map((item,index) => {
             return(
             <tr key={item.key}>
                 <td style={{textAlign:"center"}}>{index+1}</td>
@@ -43,7 +70,8 @@ function TableData() {
             </tr>
             )
         })}
-    </table>
+    </table> */}
+    <Table columns={columns} dataSource={data.reverse()} onChange={onChange} style={{width:"80%", marginLeft:"10%"}} pagination={{ pageSize:"8" }} />
     </>
     
 
