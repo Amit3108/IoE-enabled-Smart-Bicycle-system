@@ -21,10 +21,10 @@ table {
     background: #008080;
     color: #fff;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 14px;
   }
   table td{
-    font-size: 18px;
+    font-size: 14px;
     background-color: white;
   }
   table th.last {
