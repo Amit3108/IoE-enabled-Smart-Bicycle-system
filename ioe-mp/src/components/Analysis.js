@@ -124,7 +124,7 @@ function Analysis() {
       <Chart
         chartType="Line"
         width="70%"
-        height="300px"
+        height="30vh"
         data={doccur}
         style={{ marginLeft: "15%" }}
       />
@@ -132,7 +132,7 @@ function Analysis() {
       <Chart
         chartType="Bar"
         width="70%"
-        height="300px"
+        height="30vh"
         data={topCities}
         style={{ marginLeft: "15%" }}
       />
