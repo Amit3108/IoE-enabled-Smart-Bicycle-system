@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./table-style.css";
-import {Table} from 'antd';
+import { Table, Button, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 function TableData() {
   const [data, setData] = useState([]);
@@ -26,55 +27,74 @@ function TableData() {
   }, []);
   //
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
+    console.log("params", pagination, filters, sorter, extra);
   };
 
   const columns = [
     {
-      title: 'Location',
-      dataIndex: 'location',
-      width: '25%',
-      filterMode: 'tree',
-      filterSearch: true,
-      onFilter: (value, record) => record.location.startsWith(value),
+      title: 'LOCATION',
+      dataIndex: "location",
+      width: "25%",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => {
+        return (
+          <>
+            <Input
+              autoFocus
+              placeholder="Search Location"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({ closeDropdown: false });
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}
+            ></Input>
+          </>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.location.toLowerCase().includes(value.toLowerCase());
+      },
     },
     {
-      title: 'Date',
-      dataIndex: 'date',
-      width: "20%"
+      title: "Date",
+      dataIndex: "date",
+      width: "20%",
+      sorter: (a, b) => new Date(a.date) - new Date(b.date)
     },
     {
-      title: 'Time',
-      dataIndex: 'time',
-      width: "20%"
+      title: "Time",
+      dataIndex: "time",
+      width: "20%",
     },
   ];
   //
   return (
     <>
-    <h2 style={{ textAlign: "center", margin: "10px", marginTop:"20px"}}>Accident details</h2>
-    {/* <table>
-        <tr>
-            <th>Sr No.</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Time</th>
-        </tr>
-        {data.slice(0).reverse().map((item,index) => {
-            return(
-            <tr key={item.key}>
-                <td style={{textAlign:"center"}}>{index+1}</td>
-                <td>{item.location}</td>
-                <td style={{textAlign:"center"}}>{item.date}</td>
-                <td style={{textAlign:"center"}}>{item.time}</td>
-            </tr>
-            )
-        })}
-    </table> */}
-    <Table columns={columns} dataSource={data.reverse()} onChange={onChange} style={{width:"80%", marginLeft:"10%"}} pagination={{ pageSize:"8" }} />
+      <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>
+        Accident details
+      </h2>
+      <Table
+        columns={columns}
+        dataSource={data.reverse()}
+        onChange={onChange}
+        style={{ width: "80%", marginLeft: "10%" }}
+        pagination={{ pageSize: "8" }}
+        sortDirections={["descend", "ascend"]}
+      />
     </>
-    
-
   );
 }
 

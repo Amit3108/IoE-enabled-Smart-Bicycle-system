@@ -32,3 +32,9 @@ table {
   table th.last {
     border-right: none;
   }
+
+  .ant-table-thead .ant-table-cell{
+    background: #008080;
+    color: #fff;
+    text-align: center;
+  }
