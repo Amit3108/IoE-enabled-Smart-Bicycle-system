@@ -116,17 +116,19 @@ function Analysis() {
   const topCities = cOccurence.sort((a, b) => b[1] - a[1]).slice(0, 5)
   console.log(topCities)
   console.log(doccur)
+  
+  const totalAccident = data.length
 
   return (
     <div>
-      <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>Analysis</h2>
+      <h2 style={{ textAlign: "center", margin: "10px", marginTop: "20px" }}>Analysis - Total Accident: {totalAccident} </h2>
       <h4 style={{marginBottom:"8px", textAlign:"center"}}>Daily Accident Count</h4>
       <Chart
         chartType="Line"
         width="70%"
         height="30vh"
         data={doccur}
-        style={{ marginLeft: "15%", boxShadow:"0px 0px 20px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 20px 20px rgba(0, 0, 0, 0.05), 0px 30px 20px rgba(0, 0, 0, 0.05);" }}
+        style={{ marginLeft: "15%"}}
       />
       <h4 style={{marginTop: "30px",marginBottom:"8px", textAlign:"center"}}>Top 4 cities</h4>
       <Chart
@@ -134,7 +136,7 @@ function Analysis() {
         width="70%"
         height="30vh"
         data={topCities}
-        style={{ marginLeft: "15%", boxShadow:"0px 0px 20px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 20px 20px rgba(0, 0, 0, 0.05), 0px 30px 20px rgba(0, 0, 0, 0.05);" }}
+        style={{ marginLeft:"15%"}}
       />
     </div>
   );
