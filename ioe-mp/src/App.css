@@ -1,12 +1,16 @@
 
 @import '~antd/dist/antd.css';
 .main-content{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
     width: 100%;
 }
 .tabledata,.analysis{
-    width: 50%;
+    width: 49vw;
     height: 92vh;
+}
+.analysis{
+    margin-top: 8vh;
 }
 .tabledata{
     border-right: 1px solid black;
@@ -14,10 +18,29 @@
     min-height: 91vh;
     margin-bottom: 1vh;
 }
-.analysis{
+/* .analysis{
     position: fixed;
     margin-left: 50%;
-}
+} */
 .body{
     background-color: #e7f8f8;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-content{
+        display: grid;
+        grid-template-columns: repeat(1,auto);
+    }
+    .tabledata,.analysis{
+        width: 100vw;
+        height: auto;
+    }
+    .analysis{
+        margin-top: 1vh;
+        margin-bottom: 4vh;
+    }
+    .tabledata{
+        border-right: none;
+        border-bottom: 1px solid black;
+    }
 }
