@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import './Analysis.css'
 
 
 function Analysis() {
@@ -125,18 +126,14 @@ function Analysis() {
       <h4 style={{marginBottom:"8px", textAlign:"center"}}>Daily Accident Count</h4>
       <Chart
         chartType="Line"
-        width="70%"
-        height="30vh"
+        className="daily"
         data={doccur}
-        style={{ marginLeft: "15%"}}
       />
       <h4 style={{marginTop: "30px",marginBottom:"8px", textAlign:"center"}}>Top 4 cities</h4>
       <Chart
         chartType="Bar"
-        width="70%"
-        height="30vh"
         data={topCities}
-        style={{ marginLeft:"15%"}}
+        className="top"
       />
     </div>
   );

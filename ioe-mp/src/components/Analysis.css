@@ -1,0 +1,12 @@
+.daily,.top{
+    width:60%;
+    margin-left: 20%;
+    height: 30vh;
+   }
+@media only screen and (max-width: 768px) {
+    .daily,.top{
+        width:90%;
+        margin-left: 5%;
+        height: 30vh
+    }
+}
